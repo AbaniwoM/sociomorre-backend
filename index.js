@@ -18,6 +18,8 @@ import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 import rateLimit from "express-rate-limit";
 import { verifyToken } from "./middleware/auth.js";
+import cors from "cors";
+import corsOptions from "./config/corsOptions";
 
 
 // CONFIGURATIONS
@@ -31,7 +33,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(cors(corsOptions))
 app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
 
 //RATE LIMITING
